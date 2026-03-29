@@ -7,7 +7,7 @@ import (
 
 var num1 string
 var num2 string
-var operation int
+var operation string
 var exit int
 
 func addition() {
@@ -106,28 +106,36 @@ start0:
 	fmt.Println("Choose an operation:\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. Help\n6. Exit")
 	fmt.Println("Choose \"Help\" for suggestions! ")
 	for i := 0; i <= 6; i++ {
-		fmt.Scan(&operation)
-		if operation == 1 {
-			addition()
-			goto start0
-		} else if operation < 1 || operation > 6 {
-			fmt.Print("Invalid Operation\n\n")
-			goto start0
-		} else if operation == 2 {
-			subtraction()
-			goto start0
-		} else if operation == 3 {
-			multiplication()
-			goto start0
-		} else if operation == 4 {
-			division()
-			goto start0
-		} else if operation == 5 {
-			fmt.Println("Choose any of the following for an opperation:\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. Help\n6. Exit")
-			goto start0
-		} else if operation == 6 {
-			fmt.Println("Goodbye Codecrafter!")
-			break
+	start1:
+		fmt.Scanln(&operation)
+		opps, err := strconv.Atoi(operation)
+		if err == nil {
+			if opps == 1 {
+				addition()
+				goto start0
+			} else if opps < 1 || opps > 6 {
+				fmt.Print("Invalid Operation\n\n")
+				goto start0
+			} else if opps == 2 {
+				subtraction()
+				goto start0
+			} else if opps == 3 {
+				multiplication()
+				goto start0
+			} else if opps == 4 {
+				division()
+				goto start0
+			} else if opps == 5 {
+				fmt.Print("Choose any of the following for an operation:\n1. To perform an addition\n2. To perform a subtraction\n3. To perform a multiplication\n4. To perform a division\n5. Help\n6. Exit\n")
+				goto start1
+			} else if opps == 6 {
+				fmt.Println("Goodbye Codecrafter!")
+				break
+			}
+		} else {
+			fmt.Print("Input a valid operation, or choose \"Help\" for assistance: ")
+			goto start1
 		}
+
 	}
 }
