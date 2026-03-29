@@ -22,7 +22,7 @@ start:
 		fmt.Scanln(&num2)
 		val2, err := strconv.Atoi(num2)
 		if err == nil {
-			fmt.Printf("%v + %v = %v\n\n", val1, val2, val1+val2)
+			fmt.Printf("%v + %v = %v\n", val1, val2, val1+val2)
 		} else {
 			fmt.Println("Select a valid digit!")
 			goto start2
@@ -69,7 +69,7 @@ start:
 		if err == nil && val2 != 0 {
 			fmt.Printf("%v / %v = %v\n", val1, val2, val1/val2)
 		} else {
-			fmt.Println("Input a valid digit, Zero is not allowed: ")
+			fmt.Print("Input a valid digit, Zero is not allowed: ")
 			goto start1
 		}
 	} else {
@@ -103,8 +103,10 @@ start1:
 
 func main() {
 start0:
+fmt.Println(" ")
 	fmt.Println("Choose an operation:\n1. addition\n2. subtraction\n3. multiplication\n4. division\n5. Help\n6. Exit")
 	fmt.Println("Choose \"Help\" for suggestions! ")
+	fmt.Print(">>> ")
 	for i := 0; i <= 6; i++ {
 	start1:
 		fmt.Scanln(&operation)
@@ -129,8 +131,19 @@ start0:
 				fmt.Print("Choose any of the following for an operation:\n1. To perform an addition\n2. To perform a subtraction\n3. To perform a multiplication\n4. To perform a division\n5. Help\n6. Exit\n")
 				goto start1
 			} else if opps == 6 {
-				fmt.Println("Goodbye Codecrafter!")
-				break
+				var res string
+				fmt.Print("Do you want to exit the program? (y/n): ")
+				start2:
+				fmt.Scanln(&res)
+				if res == "y" || res == "Y" {
+					fmt.Println("Goodbye Codecrafter!")
+					break
+				} else if res == "n" || res == "N"{
+					goto start0
+				} else {
+					fmt.Print("Input a valid response: ")
+					goto start2
+				}
 			}
 		} else {
 			fmt.Print("Input a valid operation, or choose \"Help\" for assistance: ")
