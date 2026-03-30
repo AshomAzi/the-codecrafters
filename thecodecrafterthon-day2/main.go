@@ -37,7 +37,7 @@ start1:
 
 func hexbinToDec() {
 	fmt.Print("Input a valid decimal value: ")
-	start1:
+start1:
 	fmt.Scan(&value)
 	val1, err := strconv.Atoi(value)
 	if err == nil {
@@ -53,24 +53,36 @@ func hexbinToDec() {
 func main() {
 	fmt.Println("Welcome to the Base Converter:")
 start1:
-	fmt.Println("Choose an operation\n1. To convert from Hexadecimal to Binary\n2. To convert from Binary to Decimal\n3. To convert from Decimal Hexadecimal and Binary.")
+	fmt.Println("Choose an operation\n1. To convert from Hexadecimal to Binary\n2. To convert from Binary to Decimal\n3. To convert from Decimal Hexadecimal and Binary\n4. For help\n5. To exit.")
+	start2:
 	fmt.Print(">>> ")
-	fmt.Scan(&operation)
 
-	if operation == "1" {
-		hexToDec()
-		goto start1
-	} else if operation == "2" {
-		binToDec()
-		goto start1
-	} else if operation == "3" {
-		hexbinToDec()
-		goto start1
-	// } else if operation  {
-	// 	fmt.Print("Empty input is not supported")
-	} else {
-		fmt.Print("Invalid Operation, Try Again: ")
-		goto start1
+	for i := 1; i <= 5; i++ {
+		fmt.Scan(&operation)
+		i, err := strconv.Atoi(operation)
+		if err == nil {
+			if i == 1 {
+				hexToDec()
+				goto start1
+			} else if i == 2 {
+				binToDec()
+				goto start1
+			} else if i == 3 {
+				hexbinToDec()
+				goto start1
+			} else if i == 4 {
+				fmt.Println("Choose an operation between\n1. To convert from Hexadecimal to Binary\n2. To convert from Binary to Decimal\n3. To convert from Decimal Hexadecimal and Binary\n4. For help\n5. To exit.")
+				goto start2
+			} else if i == 5 {
+				fmt.Println("Goodbye Codecrafter!")
+				break
+			} else {
+				fmt.Print("Invalid Operation, Try Again: ")
+				goto start1
+			}
+		} else {
+			fmt.Print("Input a valid operation: ")
+		}
 	}
 
 }
