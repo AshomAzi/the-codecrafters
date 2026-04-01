@@ -23,7 +23,7 @@
 
 // CodeCrafters — Operation Gopher Protocol
 // Module: File Pipeline
-// Author: [Azi Bulua]
+// Author: [Azi Bulus]
 // Squad:  [Pointers]
 
 package main
@@ -31,11 +31,9 @@ package main
 import (
 	"bufio"
 	transformation "file-pipeline/Transformation"
-
-	// "file-pipeline/Transformation"
-
 	"log"
 	"os"
+	"strings"
 )
 
 func check(e error) {
@@ -58,14 +56,15 @@ func main() {
 	writer := bufio.NewWriter(f2)
 	for text.Scan() {
 		line := text.Text()
+		var new string
+		if line == strings.ToLower(line) {
+			new = transformation.Title(line)
+			_, err := writer.WriteString(new + "\n")
+			check(err)
+		}
 
-		new := transformation.Title(line)
+		// new = transformation.Upper(new)
+		writer.Flush()
 
-		new = transformation.Upper(new)
-
-
-		_, err := writer.WriteString(new + "\n")
-		check(err)
 	}
-	writer.Flush()
 }
