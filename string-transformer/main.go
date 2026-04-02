@@ -6,10 +6,10 @@
 package main
 
 import (
-	"slices"
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -92,7 +92,29 @@ func title() {
 }
 
 func snake_case() {
+	fmt.Print("Input a text: ")
+	scanner := bufio.NewScanner(os.Stdin)
 
+	if scanner.Scan() {
+		line := scanner.Text()
+		line = strings.ToLower(line)
+		result := ""
+		for i := 0; i < len(line); i++ {
+			letter := line[i] >= 'a' && line[i] <= 'z'
+			digit := line[i] >= '0' && line[i] <= '9'
+			space := line[i] == ' '
+			if letter || digit {
+				result += string(line[i])
+			} else if space {
+				result += "_"
+			}
+		}
+		for strings.Contains(result, "__") {
+			result = strings.ReplaceAll(result, "__", "_")
+		}
+		result = strings.Trim(result, "_")
+		fmt.Println(result)
+	}
 }
 
 func reverse() {
@@ -100,6 +122,6 @@ func reverse() {
 }
 
 func main() {
-	title()
+	snake_case()
 	// lower()
 }
