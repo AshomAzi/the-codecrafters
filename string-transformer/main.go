@@ -6,6 +6,7 @@
 package main
 
 import (
+	"slices"
 	"bufio"
 	"fmt"
 	"os"
@@ -69,25 +70,25 @@ start1:
 }
 
 func title() {
-	var small = []string{"a", "an", "the", "and", "but",
-		"or", "for", "nor", "on", "at", "to", "by", "in",
-		"of", "up", "as", "is", "it"}
+	var smallWords = []string{"a", "an", "the", "and", "but",
+		"or", "for", "nor", "on", "at", "to", "by",
+		"in", "of", "up", "as", "is", "it"}
 	fmt.Print("Input a text: ")
-	val := bufio.NewScanner(os.Stdin)
-	if val.Scan() {
-		line := val.Text()
-		newLine := strings.Fields(line)
-		for i := 0; i <= len(small)-1; i++ {
-			for j := 0; j <= len(newLine)-1; j++ {
-				if small[i] == newLine[j] {
-					fmt.Println(small[j])
-				}
-				fmt.Print(small[i], " ")
+	text := bufio.NewScanner(os.Stdin)
+	if text.Scan() {
+		line := text.Text()
+		words := strings.Fields(line)
+
+		for i, word := range words {
+			isSmall := slices.Contains(smallWords, strings.ToLower(word))
+			if i == 0 || !isSmall {
+				words[i] = strings.ToUpper(word[:1]) + strings.ToLower(word[1:])
+			} else {
+				words[i] = strings.ToLower(word)
 			}
 		}
-		fmt.Println(" ")
+		fmt.Println(strings.Join(words, " "))
 	}
-
 }
 
 func snake_case() {
