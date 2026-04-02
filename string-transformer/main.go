@@ -93,10 +93,10 @@ func title() {
 
 func snake_case() {
 	fmt.Print("Input a text: ")
-	scanner := bufio.NewScanner(os.Stdin)
+	text := bufio.NewScanner(os.Stdin)
 
-	if scanner.Scan() {
-		line := scanner.Text()
+	if text.Scan() {
+		line := text.Text()
 		line = strings.ToLower(line)
 		result := ""
 		for i := 0; i < len(line); i++ {
@@ -118,10 +118,25 @@ func snake_case() {
 }
 
 func reverse() {
-
+	fmt.Print("Input a text: ")
+	scanner := bufio.NewScanner(os.Stdin)
+	
+	if scanner.Scan() {
+		line := scanner.Text()
+		words := strings.Fields(line)
+		for i := 0; i < len(words); i++ {
+			word := words[i]
+			for j := len(word) - 1; j >= 0; j-- {
+				fmt.Print(string(word[j]))
+			}
+			fmt.Print(" ")
+		}
+		fmt.Println()
+	}
 }
 
+
 func main() {
-	snake_case()
+	reverse()
 	// lower()
 }
