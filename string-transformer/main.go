@@ -11,9 +11,9 @@ import (
 	"os"
 	"slices"
 	"strings"
+	"strconv"
 )
 
-var command string
 
 func upper() {
 	fmt.Print("Enter a text: ")
@@ -137,6 +137,41 @@ func reverse() {
 
 
 func main() {
-	reverse()
-	// lower()
+	start:
+	fmt.Print("Select a command.\n1. Upper\n2. Lower\n3. Caps\n4. Title\n5. Snake Case\n6. Reverse\n7. Exit\n>>> ")
+	start1:
+	text := bufio.NewScanner(os.Stdin)
+	for text.Scan() {
+		line := text.Text()
+		newinput, err := strconv.Atoi(line)
+		if err == nil {
+		if newinput == 1 {
+				upper()
+				goto start
+			} else if newinput ==  2 {
+				lower()
+				goto start
+			} else if newinput ==  3 {
+				caps()
+				goto start
+			} else if newinput == 4 {
+				title()
+				goto start
+			} else if newinput == 5 {
+				snake_case()
+				goto start
+			} else if newinput == 6 {
+				reverse()
+			} else if newinput == 7 {
+				break
+			}else {
+				fmt.Println("Invalid Input")
+				goto start1
+			}
+		} else {
+			fmt.Println("Invalid Command, enter the digit value of the command!")
+			goto start1
+		}
+		
+	}
 }
